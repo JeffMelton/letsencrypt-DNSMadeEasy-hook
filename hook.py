@@ -149,16 +149,6 @@ def create_txt_record(args):
     logger.info(" + Settling down for 10s...")
     time.sleep(10)
 
-    retries=2
-    while(_has_dns_propagated(name, token) == False and retries > 0):
-        logger.info(" + DNS not propagated, waiting 30s...")
-        retries-=1
-        time.sleep(30)
-
-    if retries <= 0:
-        logger.error("Error resolving TXT record in domain {0}".format(domain))
-        sys.exit(1)
-
 # http://api.dnsmadeeasy.com/V2.0/dns/managed/{domain_id}/records
 def delete_txt_record(args):
     domain, token = args[0], args[2]
